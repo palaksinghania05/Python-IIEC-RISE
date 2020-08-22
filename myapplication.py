@@ -1,7 +1,7 @@
 import pyttsx3
 import os
 
-pyttsx3.speak("Welcome to this application ! I'm PyCom. ")
+pyttsx3.speak("Welcome to this application ! I'm *****. ")
 
 while(True):
 	print("Talk to me with your requirement : " , end="")
