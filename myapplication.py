@@ -1,73 +1,97 @@
 import pyttsx3
 import os
+import speech_recognition as sr
+import webbrowser
 
-pyttsx3.speak("Welcome to this application ! I'm *****. ")
+r = sr.Recognizer()
 
-while(True):
-	print("Talk to me with your requirement : " , end="")
-	p=input()
-	if((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p) or ("search" in p)) and (("chrome" in p) or ("browser" in p) or ("google" in p))):
-		pyttsx3.speak("Opening Chrome")	
-		os.system("chrome")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p) or ("write" in p)) and (("notepad" in p) or ("editor" in p) or ("document" in p) or ("file" in p))):
-		pyttsx3.speak("Opening Notepad")
-		os.system("notepad")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p) or ("play" in p)) and (("vlc" in p) or ("player" in p) or ("music" in p) or ("song" in p))):
-		pyttsx3.speak("Opening Windows Media Player")
-		os.system("vlc")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p) or ("click" in p)) and (("cam" in p) or ("camera" in p) or ("webcam" in p) or ("photo" in p))):
-		pyttsx3.speak("Opening Camera")
-		os.system("start microsoft.windows.camera:")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p) or ("solve" in p)) and (("calculator" in p) or ("calc" in p) or ("operation" in p) or ("calculation" in p))):
-		pyttsx3.speak("Opening Calculator")
-		os.system("start calc")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p) or ("change" in p)) and (("settings" in p) or ("setting" in p))):
-		pyttsx3.speak("Opening Settings")
-		os.system("start ms-settings:")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p)) and (("notebook" in p) or ("jupyter notebook" in p) or ("jupyter" in p))):
-		pyttsx3.speak("Opening Jupyter")
-		os.system("jupyter notebook")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p)) and (("excel" in p) or ("ms excel" in p) or ("msexcel" in p) or ("microsoft excel" in p) or ("spreadsheet" in p) or ("database" in p))):
-		pyttsx3.speak("Opening M S Excel")
-		os.system("start excel")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p) or ("make" in p)) and (("powerpoint" in p) or ("ms powerpoint" in p) or ("mspowerpoint" in p) or ("microsoft powerpoint" in p) or ("presentation" in p))):
-		pyttsx3.speak("Opening M S Powerpoint")
-		os.system("start powerpnt")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p) or ("see" in p)) and (("applications" in p) or ("apps" in p))):
-		pyttsx3.speak("Opening Applications")
-		os.system("start shell:appsfolder")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p) or ("draw" in p)) and (("diagram" in p) or ("paint" in p) or ("ms paint" in p) or ("mspaint" in p))):
-		pyttsx3.speak("Opening M S Paint")
-		os.system("mspaint")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p) or ("write" in p)) and (("Word" in p) or ("word" in p) or ("msword" in p) or ("ms word" in p))):
-		pyttsx3.speak("Opening M S Word")
-		os.system("start winword")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p) or ("write" in p)) and ("wordpad" in p)):
-		pyttsx3.speak("Opening Wordpad")
-		os.system("write")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p)) and (("file explorer" in p) or ("explorer" in p))):
-		pyttsx3.speak("Opening File Explorer")
-		os.system("start explorer")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p)) and (("controlpanel" in p) or ("control panel" in p) or ("cpanel" in p) or ("control" in p))):
-		pyttsx3.speak("Opening Control Panel")
-		os.system("control")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p)) and (("cmd" in p) or ("commandprompt" in p) or ("command prompt" in p))):
-		pyttsx3.speak("Opening Command Prompt")
-		os.system("start cmd")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p)) and ("calendar" in p)):
-		pyttsx3.speak("Opening Calendar")
-		os.system("start outlookcal:")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p) or ("launch" in p)) and (("msedge" in p) or ("microsoft edge" in p))):
-		pyttsx3.speak("Opening Microsoft Edge")
-		os.system("start microsoft-edge:")
-	elif((("run" in p) or ("execute" in p) or ("open" in p) or ("start" in p) or ("change" in p)) and (("settings" in p) or ("setting" in p))):
-		pyttsx3.speak("Opening Settings")
-		os.system("start ms-settings:")
+pyttsx3.speak("Welcome to this application ! I'm PyCom. ")
 
-	elif(("exit" in p) or ("quit" in p)):
-		break
-	else:
-		pyttsx3.speak("This application is not supported yet!")
-		print("not supported till now")
+while True:
+    print("Talk to me with your requirement : ", end=" ")
+    with sr.Microphone() as source:
+        print("Listening...")
+        audio = r.listen(source)
+        print("Recognising...")
+        data = r.recognize_google(audio)
+        print(data)
+    if (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data) or ("write" in data)) and (
+            ("notepad" in data) or ("editor" in data) or ("document" in data) or ("file" in data)):
+        pyttsx3.speak("Opening Notepad")
+        os.system("notepad")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data) or ("play" in data)) and (
+            ("vlc" in data) or ("player" in data) or ("music" in data) or ("song" in data)):
+        pyttsx3.speak("Opening Windows Media Player")
+        os.system("vlc")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data) or ("click" in data)) and (
+            ("cam" in data) or ("camera" in data) or ("webcam" in data) or ("photo" in data)):
+        pyttsx3.speak("Opening Camera")
+        os.system("start microsoft.windows.camera:")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data) or ("solve" in data)) and (
+            ("calculator" in data) or ("calc" in data) or ("operation" in data) or ("calculation" in data)):
+        pyttsx3.speak("Opening Calculator")
+        os.system("start calc")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data) or ("change" in data)) and (
+            ("settings" in data) or ("setting" in data)):
+        pyttsx3.speak("Opening Settings")
+        os.system("start ms-settings:")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data)) and (
+            ("notebook" in data) or ("jupyter notebook" in data) or ("jupyter" in data)):
+        pyttsx3.speak("Opening Jupyter")
+        os.system("jupyter notebook")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data)) and (
+            ("excel" in data) or ("ms excel" in data) or ("msexcel" in data) or ("microsoft excel" in data) or (
+            "spreadsheet" in data) or ("database" in data)):
+        pyttsx3.speak("Opening M S Excel")
+        os.system("start excel")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data) or ("make" in data)) and (
+            ("powerpoint" in data) or ("ms powerpoint" in data) or ("mspowerpoint" in data) or ("microsoft powerpoint" in data) or (
+            "presentation" in data)):
+        pyttsx3.speak("Opening M S Powerpoint")
+        os.system("start powerpnt")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data) or ("see" in data)) and (
+            ("applications" in data) or ("apps" in data)):
+        pyttsx3.speak("Opening Applications")
+        os.system("start shell:appsfolder")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data) or ("draw" in data)) and (
+            ("diagram" in data) or ("paint" in data) or ("ms paint" in data) or ("mspaint" in data)):
+        pyttsx3.speak("Opening M S Paint")
+        os.system("mspaint")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data) or ("write" in data)) and (
+            ("Word" in data) or ("word" in data) or ("msword" in data) or ("ms word" in data)):
+        pyttsx3.speak("Opening M S Word")
+        os.system("start winword")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data) or ("write" in data)) and ("wordpad" in data):
+        pyttsx3.speak("Opening Wordpad")
+        os.system("write")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data)) and (
+            ("file explorer" in data) or ("explorer" in data)):
+        pyttsx3.speak("Opening File Explorer")
+        os.system("start explorer")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data)) and (
+            ("controlpanel" in data) or ("control panel" in data) or ("cpanel" in data) or ("control" in data)):
+        pyttsx3.speak("Opening Control Panel")
+        os.system("control")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data)) and (
+            ("cmd" in data) or ("commandprompt" in data) or ("command prompt" in data)):
+        pyttsx3.speak("Opening Command Prompt")
+        os.system("start cmd")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data)) and ("calendar" in data):
+        pyttsx3.speak("Opening Calendar")
+        os.system("start outlookcal:")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data) or ("launch" in data)) and (
+            ("msedge" in data) or ("microsoft edge" in data)):
+        pyttsx3.speak("Opening Microsoft Edge")
+        os.system("start microsoft-edge:")
+    elif (("run" in data) or ("execute" in data) or ("open" in data) or ("start" in data) or ("change" in data)) and (
+            ("settings" in data) or ("setting" in data)):
+        pyttsx3.speak("Opening Settings")
+        os.system("start ms-settings:")
+
+    elif ("exit" in data) or ("quit" in data):
+        break
+    else:
+        pyttsx3.speak("This application is not supported yet!")
+        print("not supported till now")
 pyttsx3.speak("Thank you for using me ! ")
 print("Thank you ! ")
